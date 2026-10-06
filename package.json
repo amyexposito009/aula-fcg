@@ -1,0 +1,67 @@
+{
+  "name": "nextjs-boilerplate",
+  "version": "0.1.0",
+  "description": "Next.js boilerplate with husky, lint-staged, biome, vitest, react-testing-library, storybook and ghaction.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome lint src",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "fix": "biome check --write .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:ci": "vitest run",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
+    "postinstall": "husky"
+  },
+  "engines": {
+    "node": ">=24.13.0"
+  },
+  "packageManager": "pnpm@10.30.3",
+  "dependencies": {
+    "@base-ui-components/react": "1.0.0-rc.0",
+    "@t3-oss/env-nextjs": "0.13.11",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "^0.575.0",
+    "next": "16.2.10",
+    "next-themes": "^0.4.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "3.5.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.4",
+    "@storybook/nextjs": "10.2.13",
+    "@storybook/react": "10.2.13",
+    "@tailwindcss/postcss": "4.2.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "25.5.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "^5.1.4",
+    "husky": "9.1.7",
+    "jsdom": "^29.1.1",
+    "lint-staged": "17.0.8",
+    "pinst": "3.0.0",
+    "postcss": "8.5.10",
+    "storybook": "10.4.6",
+    "tailwind-scrollbar": "4.0.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.7"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  }
+}

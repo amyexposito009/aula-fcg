@@ -1,0 +1,95 @@
+name: Test application generation
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  biome-check:
+    name: Biome check
+    runs-on: ubuntu-latest
+    env:
+      SKIP_ENV_VALIDATION: ${{ secrets.SKIP_ENV_VALIDATION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run Biome check
+        run: pnpm check
+
+  test-check:
+    name: Tests - vitest
+    needs: [biome-check]
+    runs-on: ubuntu-latest
+    env:
+      SKIP_ENV_VALIDATION: ${{ secrets.SKIP_ENV_VALIDATION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm test:ci
+        env:
+          CI: true
+
+  nextjs-build-check:
+    name: Build nextjs application
+    needs: [test-check]
+    runs-on: ubuntu-latest
+    env:
+      SKIP_ENV_VALIDATION: ${{ secrets.SKIP_ENV_VALIDATION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build nextjs
+        run: pnpm build
+        env:
+          CI: true
+
+  storybook-build-check:
+    name: Build storybook application
+    needs: [test-check]
+    runs-on: ubuntu-latest
+    env:
+      SKIP_ENV_VALIDATION: ${{ secrets.SKIP_ENV_VALIDATION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build storybook
+        run: pnpm storybook:build
+        env:
+          CI: true
