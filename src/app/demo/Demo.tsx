@@ -3,7 +3,10 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
-const links = [{ slug: '/', label: 'Home' }];
+const links = [
+  { slug: '/', label: 'Home' },
+  { slug: '/demo', label: 'Demo' }
+];
 
 const featuresItems = [
   { icon: '🏎️', name: 'Next.js (app routing)' },

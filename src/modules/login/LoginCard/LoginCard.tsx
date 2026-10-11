@@ -31,7 +31,7 @@ export const LoginCard = () => (
         <LoginForm />
         <div className="mt-6 flex flex-col space-y-3.5 border-t border-gray-100 pt-5">
           <button
-            className="text-brand-blue w-full cursor-pointer rounded-lg border border-gray-300 bg-white px-3 py-2 text-center text-xs font-semibold text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
+            className="w-full cursor-pointer rounded-lg border border-gray-300 bg-white px-3 py-2 text-center text-xs font-semibold text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-brand-blue"
             type="button"
           >
             Acceder como invitado
@@ -45,7 +45,7 @@ export const LoginCard = () => (
             >
               <svg
                 aria-hidden="true"
-                className="text-brand-blue inline h-4 w-4"
+                className="inline h-4 w-4"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >

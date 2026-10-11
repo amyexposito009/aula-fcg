@@ -21,7 +21,7 @@ interface RootLayoutProps {
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html lang="en">
+    <html lang="es" suppressHydrationWarning>
       <body className={cn(inter.variable, 'font-primary')} suppressHydrationWarning>
         <MainProvider>{children}</MainProvider>
       </body>

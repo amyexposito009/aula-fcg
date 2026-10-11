@@ -9,13 +9,13 @@ export const LoginHeader = () => (
       <div className="flex items-center space-x-3.5">
         <Image
           alt="Escudo Oficial FCG - Facultad Calixto García"
-          className="h-14 w-auto object-contain drop-shadow-sm"
-          height={56}
+          className="h-16 w-16 object-contain brightness-125 drop-shadow-sm"
+          height={331}
           priority
-          src="/images/aula-fcg-escudo.jpg"
-          width={56}
+          src="/images/cg.jpeg"
+          width={334}
         />
-        <div className="border-brand-blue/20 ml-3.5 border-l-2 pl-3.5">
+        <div className="border-brand-blue/20 border-l-2 pl-3.5">
           <span className="text-brand-blue block text-xl leading-tight font-bold tracking-tight">
             Aula <span className="text-brand-green">FCG</span>
           </span>
