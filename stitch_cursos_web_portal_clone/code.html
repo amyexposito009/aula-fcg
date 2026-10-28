@@ -1,0 +1,932 @@
+<!DOCTYPE html><html class="h-full bg-[#f8f9ff]" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Aula FCG - Entorno Virtual de Aprendizaje | Facultad de Ciencias Médicas Calixto García</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration conforming to Design System -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fcg: {
+              navy: '#0b3c68',
+              deep: '#002743',
+              dark: '#001d34',
+              green: '#16a34a',
+              greenHover: '#15803d',
+              greenLight: '#dcfce7',
+              accent: '#22c55e',
+              border: '#e2e8f0',
+              bgLight: '#f8f9ff'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-layout">
+    /* Subtle transitions for interactive tree items */
+    .collapse-content {
+      transition: max-height 0.25s ease-out, opacity 0.2s ease-out;
+    }
+    .chevron-icon {
+      transition: transform 0.2s ease-in-out;
+    }
+    details[open] .chevron-icon {
+      transform: rotate(90deg);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="min-h-full flex flex-col font-sans text-slate-800 bg-[#f8f9ff] antialiased selection:bg-emerald-100 selection:text-emerald-900">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white text-slate-800 border-b border-slate-200/80 shadow-xs sticky top-0 z-50 select-none">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Left Section: Navigation Toggle & Brand conforming to Aula FCG -->
+<div class="flex items-center space-x-3 sm:space-x-4">
+<button aria-label="Abrir menú de navegación" class="p-2 rounded-lg text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500" type="button">
+<svg aria-hidden="true" class="w-6 h-6 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<a class="flex items-center gap-3 group" href="#">
+<!-- Emblem / Insignia of Calixto García -->
+<div class="w-12 h-12 rounded-xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-center p-1.5 transition-transform group-hover:scale-105"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ObKM-gNXr7fKPMMAEd3-VuPowk-wGW9U7hdvlM9c8p2jJTsEfkpOhDzR7gfemaYJ2mESYq7S7teyvohz9AIOErCs85scy04R_p6gznu8W1Odm2TgqDnyvfPFFwo46I3ZL52GuXi3tUsJgeumDYLxfbOa5DmlJkwG81WpMqlI_gQRDzAPgy13OdnL5oocq9u_snA0ulji8f0ML40hu9n_xMBVmtdSRmh3SqIVF7O1hid6Hsirm51kA--9NzG2AT2jpIo" alt="Escudo FCG" class="h-full w-auto object-contain"></div>
+<div class="flex flex-col"><div class="flex items-baseline gap-1.5 leading-none"><span class="text-2xl font-black tracking-tight text-[#0b3c68]">Aula</span><span class="text-2xl font-black tracking-tight text-[#16a34a]">FCG</span></div><span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold mt-1">FACULTAD DE CIENCIAS MÉDICAS "CALIXTO GARCÍA"</span></div>
+</a>
+</div>
+<!-- Right Section: Navigation Links & User Access -->
+<div class="flex items-center space-x-2 sm:space-x-5">
+<nav class="hidden md:flex items-center space-x-5 text-sm font-semibold text-slate-700">
+<div class="relative group cursor-pointer">
+<button class="flex items-center gap-1 text-[#16a34a] hover:text-emerald-700 transition-colors py-1">
+<span class="">Pregrado</span>
+<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="relative group cursor-pointer">
+<button class="flex items-center gap-1 text-[#16a34a] hover:text-emerald-700 transition-colors py-1">
+<span class="">Postgrado</span>
+<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</nav>
+<!-- User Login / Profile Pill Button -->
+<a class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-300 text-xs sm:text-sm font-medium text-[#0b3c68] hover:bg-slate-50 transition-all shadow-xs" href="#">
+<svg class="w-4 h-4 text-[#0b3c68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+<span class="font-semibold">Ingresar</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: BreadcrumbBar -->
+<nav aria-label="Migas de pan" class="bg-white border-b border-slate-200 shadow-2xs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
+<ol class="flex items-center flex-wrap text-sm gap-1.5 text-slate-500">
+<li class="">
+<a class="text-[#0b3c68] hover:text-[#16a34a] hover:underline transition-colors font-medium" href="#">Área personal</a>
+</li>
+<li class="text-slate-400">/</li>
+<li class="">
+<a class="text-[#0b3c68] hover:text-[#16a34a] hover:underline transition-colors font-medium" href="#">Cursos</a>
+</li>
+
+
+</ol>
+</div>
+</nav>
+<!-- END: BreadcrumbBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="bg-white rounded-xl shadow-xs border border-slate-200/80 p-6 md:p-8 space-y-7">
+<!-- Category Selector Section -->
+<section class="rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50/60 to-blue-50/30 p-5 flex flex-col justify-start" data-purpose="department-banner">
+
+<h1 class="text-lg md:text-xl font-bold text-[#0b3c68]">Facultad de Ciencias Médicas "Calixto García"</h1>
+<p class="text-xs md:text-sm text-slate-600 mt-1 max-w-3xl">
+          Programas de estudio, asignaturas curriculares y recursos docentes de las ciencias de la salud para estudiantes y profesores.
+        </p>
+</section><section class="space-y-2" data-purpose="category-filter">
+<label class="block text-sm font-semibold text-[#0b3c68]" for="category-select">
+          Categorías:
+        </label>
+<div class="relative max-w-2xl">
+<select class="w-full rounded-lg border-slate-300 text-slate-800 text-sm py-2.5 pl-3.5 pr-10 focus:border-[#16a34a] focus:ring-2 focus:ring-emerald-500/20 bg-slate-50/70 shadow-2xs cursor-pointer font-medium" id="category-select">
+<option selected="">Facultad de Ciencias Médicas "Calixto García"</option>
+<option>Carrera de Medicina</option>
+<option>Licenciatura en Enfermería</option>
+<option>Tecnología de la Salud</option>
+<option>Cursos de Postgrado y Diplomados</option>
+</select>
+</div>
+</section>
+<!-- Department Description Box with Medical Title Header Style -->
+
+<!-- Course Search Bar -->
+
+<!-- Section Title Style (image 4 style: Green bold heading with underline accent) -->
+<div class="flex items-center justify-between pt-4 border-t border-slate-100">
+<div class="flex flex-col"><div class="flex items-center gap-2.5"><h2 class="text-2xl md:text-2xl font-extrabold text-[#0b3c68] tracking-tight flex items-center gap-2"><span class="text-[#16a34a]">Carreras</span><span class="">y</span><span class="">Asignaturas</span></h2></div><div class="flex items-center gap-1.5 mt-2"><div class="w-10 h-1 bg-[#16a34a] rounded-full"></div><div class="w-3 h-1 bg-[#0b3c68] rounded-full"></div><div class="w-1.5 h-1 bg-slate-300 rounded-full"></div></div></div>
+<!-- Global Tree Toggle Action -->
+<div class="flex flex-col items-end gap-2">
+<form class="flex items-center gap-1.5 max-w-xs mb-2" onsubmit="event.preventDefault()"><label class="sr-only" for="course-search-input">Buscar cursos</label><div class="relative flex-grow"><input class="w-full text-sm border-slate-300 rounded-lg py-1.5 px-3 placeholder-slate-400 focus:border-[#16a34a] focus:ring-2 focus:ring-emerald-500/20 bg-slate-50/80 shadow-2xs" id="course-search-input" placeholder="Buscar cursos..." type="search"></div><button class="inline-flex items-center justify-center px-3 py-1.5 bg-[#16a34a] hover:bg-[#15803d] active:bg-emerald-800 text-white rounded-lg font-semibold transition-all shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1" title="Buscar" type="submit"><svg aria-hidden="true" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg><span class="sr-only">Buscar</span></button></form><button class="text-xs sm:text-sm font-semibold text-[#0b3c68] hover:text-[#16a34a] flex items-center gap-1.5 focus:outline-none transition-colors" id="btn-toggle-all" type="button">
+<svg class="w-4 h-4 text-[#16a34a]" fill="currentColor" viewBox="0 0 20 20">
+<path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path>
+</svg>
+<span id="toggle-all-label" class="">Expandir todo</span>
+</button>
+
+</div>
+</div>
+<!-- BEGIN: AcademicTreeSection -->
+<section class="space-y-3 pt-1" data-purpose="academic-tree"><!-- BLOQUE 1: CARRERA DE MEDICINA -->
+<div class="space-y-3 pt-2">
+  <div class="flex items-center justify-between p-4 bg-slate-50/80 border border-slate-200/90 rounded-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#16a34a] border border-emerald-100 flex items-center justify-center shrink-0 shadow-2xs"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 4.5v4a4.5 4.5 0 009 0v-4M9 13.5v3.25a3.25 3.25 0 006.5 0V15m3.5 0a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+      <div>
+        <h3 class="text-base font-bold text-[#0b3c68]">Medicina</h3>
+        <p class="text-xs text-slate-500 font-medium">Formación médica integral, clínico-quirúrgica y comunitaria</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#16a34a]"></span>
+      6 años de estudio
+    </span>
+  </div>
+
+  <!-- Medicina: Primer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Primer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold text-[#16a34a] uppercase bg-emerald-50 px-2 py-0.5 rounded">Semestre I</span>
+          <h4 class="text-xs font-bold text-[#0b3c68] mt-1.5">Morfofisiología I</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Bases biomédicas celulares y tejidos fundamentales</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Médica Básica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold text-[#16a34a] uppercase bg-emerald-50 px-2 py-0.5 rounded">Semestre I</span>
+          <h4 class="text-xs font-bold text-[#0b3c68] mt-1.5">Introducción a la Salud Pública</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Determinantes sociales y atención comunitaria</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Salud Pública</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold text-[#0b3c68] uppercase bg-blue-50 px-2 py-0.5 rounded">Semestre II</span>
+          <h4 class="text-xs font-bold text-[#0b3c68] mt-1.5">Morfofisiología II</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Sistemas cardiovascular, respiratorio y digestivo</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Médica Básica</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Medicina: Segundo Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Segundo Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Microbiología y Parasitología</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Patógenos de interés clínico y bioseguridad</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Preclínica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Farmacología General</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Principios terapéuticos y farmacocinética</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Preclínica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Inmunología Básica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Respuesta inmunológica y patologías autoinmunes</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Preclínica</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Medicina: Tercer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Tercer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Propedéutica Clínica y Semiología</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Examen físico, síntomas y signos de enfermedad</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Clínica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Medicina Interna</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Diagnóstico y manejo integral del paciente adulto</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Hospitalario</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Cirugía General</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Patología quirúrgica fundamental y urgencias</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Quirúrgico</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Medicina: Cuarto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Cuarto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Pediatría</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Atención clínica y desarrollo de la infancia y adolescencia</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Especialidad</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Ginecología y Obstetricia</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Salud reproductiva materna, parto y patología ginecológica</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Especialidad</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Psiquiatría Clínica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Salud mental, psicopatología y terapias psiquiátricas</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Especialidad</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Medicina: Quinto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Quinto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Medicina General Integral (MGI)</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Atención primaria, dispensarización y salud familiar</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">APS</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Medicina Legal y Ética Médica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Aspectos periciales, deontología y legislación médica</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Forense</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Dermatología y Oftalmología</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Diagnóstico y manejo en consulta de especialidades ambulatorias</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Especialidad</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Medicina: Sexto Año (Internado) -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Sexto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">Práctica Profesional</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Rotación Medicina Interna</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Guardias médicas y salas de hospitalización</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver rotación</span><span class="text-slate-400 font-normal">Hospitalario</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Rotación Cirugía General</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Quirófano, urgencias y manejo postoperatorio</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver rotación</span><span class="text-slate-400 font-normal">Quirúrgico</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Rotación Pediatría</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Atención pediátrica y neonatología hospitalaria</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver rotación</span><span class="text-slate-400 font-normal">Pediatría</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Rotación Ginecobstetricia y MGI</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Sala de partos y policlínico universitario</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver rotación</span><span class="text-slate-400 font-normal">APS / Obst.</span></a>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- BLOQUE 2: CARRERA DE ENFERMERÍA -->
+<div class="space-y-3 pt-4">
+  <div class="flex items-center justify-between p-4 bg-slate-50/80 border border-slate-200/90 rounded-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#16a34a] border border-emerald-100 flex items-center justify-center shrink-0 shadow-2xs">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m-2-2h4"></path></svg>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-[#0b3c68]">Enfermería</h3>
+        <p class="text-xs text-slate-500 font-medium">Cuidados enfermeros integrales, gestión hospitalaria y atención comunitaria</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-[#0b3c68] border border-blue-100 shadow-2xs">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#0b3c68]"></span>
+      5 años de estudio
+    </span>
+  </div>
+
+  <!-- Enfermería: Primer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Primer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Fundamentos de Enfermería I</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Principios bioéticos, técnicas y procedimientos de enfermería</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Básica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Morfofisiología Humana para Enfermería</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Estructura funcional anatómica y fisiológica del organismo</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Biomédica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Enfermería Comunitaria I</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Promoción de la salud en la familia y la comunidad</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Comunitaria</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Enfermería: Segundo Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Segundo Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">4 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Farmacología en Enfermería</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Administración segura de medicamentos y dosificación</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Clínica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Proceso de Atención de Enfermería (PAE)</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Metodología científica, valoración diagnóstica y plan de cuidados</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Metodológica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Microbiología y Bioseguridad</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Control de infecciones nosocomiales y esterilización</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Hospitalaria</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Enfermería: Tercer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Tercer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Enfermería Clínico-Quirúrgica I</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Cuidados pre, trans y postoperatorios del paciente adulto</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Hospitalario</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Enfermería Clínico-Quirúrgica II</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Cuidados en enfermedades cardiovasculares y respiratorias</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Hospitalario</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Nutrición y Dietoterapia</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Soporte nutricional enteral y parenteral en hospitalización</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Nutrición</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Enfermería: Cuarto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Cuarto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Enfermería Ginecoobstétrica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Cuidados en el embarazo, trabajo de parto y puerperio</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Materno</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Enfermería Pediátrica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Atención de neonatos y paciente pediátrico en estado crítico</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Pediatría</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Urgencias y Terapia Intensiva</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Soporte vital y monitorización de pacientes críticos</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Críticos</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Enfermería: Quinto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Quinto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0b3c68] border border-blue-100 shadow-2xs">Práctica Profesional</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Gestión y Administración de Servicios</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Liderazgo, calidad hospitalaria y dirección de salas</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Gestión</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Investigación en Enfermería</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Metodología científica y trabajo de terminación de carrera</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Investigación</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Práctica Integrada Preprofesional</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Rotaciones integrales en servicios asistenciales de alta complejidad</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Asistencial</span></a>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- BLOQUE 3: CARRERA DE TECNOLOGÍA DE LA SALUD -->
+<div class="space-y-3 pt-4">
+  <div class="flex items-center justify-between p-4 bg-slate-50/80 border border-slate-200/90 rounded-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#16a34a] border border-emerald-100 flex items-center justify-center shrink-0 shadow-2xs">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-[#0b3c68]">Tecnología de la Salud</h3>
+        <p class="text-xs text-slate-500 font-medium">Bioanálisis clínico, imagenología, rehabilitación y servicios técnicos biomédicos</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#16a34a]"></span>
+      5 años de estudio
+    </span>
+  </div>
+
+  <!-- Tecnología: Primer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Primer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Introducción a la Tecnología de la Salud</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Campos profesionales y normas de seguridad en laboratorios</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Tecnología</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Morfofisiología Biomédica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Estructura de órganos y sistemas orientada a diagnósticos técnicos</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Biomédica</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Química y Bioquímica Clínica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Reacciones químicas, soluciones y fundamentos moleculares</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Laboratorio</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Tecnología: Segundo Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Segundo Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Técnicas de Laboratorio Clínico</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Muestreo biológico, centrifugación y automatización</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Bioanálisis</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Fundamentos de Imagenología</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Física de las radiaciones ionizantes y protección radiológica</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Imagen</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Instrumentación Biomédica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Mantenimiento operativo y calibración de equipos médicos</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Equipamiento</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Tecnología: Tercer Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Tercer Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Microbiología Diagnóstica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Cultivos bacterianos, antibiogramas e inmunodiagnóstico</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Diagnóstico</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Imagenología y Radiología Clínica</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Tomografía axial computarizada y ecografía diagnóstica</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Radiología</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Terapia Física y Rehabilitación</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Electroterapia, cinesiterapia y recuperación neuromotora</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Rehabilitación</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Tecnología: Cuarto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Cuarto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">3 asignaturas</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Control y Garantía de Calidad en Salud</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Estándares ISO, control de calibración y validación de ensayos</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Calidad</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Resonancia Magnética y Medicina Nuclear</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Técnicas de vanguardia y procesamiento digital de imágenes</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Alta Complejidad</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Informática Médica y Bioestadística Aplicada</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Sistemas de información hospitalaria y análisis de datos clínicos</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Informática</span></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- Tecnología: Quinto Año -->
+  <details class="academic-year group bg-white border border-slate-200/80 hover:border-emerald-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+    <summary class="flex items-center justify-between px-5 py-3.5 cursor-pointer select-none bg-white hover:bg-slate-50/70 transition-colors">
+      <div class="flex items-center gap-3">
+        <svg class="chevron-icon w-4 h-4 text-[#16a34a] transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+        </svg>
+        <span class="font-bold text-sm text-[#0b3c68] group-hover:text-[#16a34a] transition-colors">Quinto Año</span>
+        
+      </div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">Práctica Profesional</span>
+    </summary>
+    <div class="p-4 bg-slate-50/50 border-t border-slate-100 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Práctica Profesional de Bioanálisis e Imagen</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Inserción asistencial directa en centros de alta tecnología</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Asistencial</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Gestión de Tecnologías Sanitarias</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Evaluación tecnológica, renovación y bioética tecnológica</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Gestión</span></a>
+      </div>
+      <div class="p-3.5 border border-slate-200/90 rounded-xl bg-white flex flex-col justify-between">
+        <div>
+          <h4 class="text-xs font-bold text-[#0b3c68]">Trabajo de Terminación de Carrera (TTC)</h4>
+          <p class="text-[11px] text-slate-500 mt-0.5">Investigación técnica aplicada al sistema de salud</p>
+        </div>
+        <a class="mt-3 pt-2 border-t border-slate-100 font-bold text-xs text-[#16a34a] flex items-center justify-between hover:underline" href="#"><span class="">Ver cursos</span><span class="text-slate-400 font-normal">Investigación</span></a>
+      </div>
+    </div>
+  </details>
+</div></section>
+<!-- END: AcademicTreeSection -->
+<!-- Big action button conforming to IMAGE_3: 'VER TODOS LOS CURSOS' -->
+
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: InstitutionalFooter conforming to Aula FCG (IMAGE_2) -->
+<footer class="bg-[#002743] text-white border-t border-[#0b3c68] mt-auto pt-10 pb-6 text-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-blue-900/40">
+<!-- Col 1: Brand & Description -->
+<div class="lg:col-span-2 space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-white p-1.5 flex items-center justify-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ObKM-gNXr7fKPMMAEd3-VuPowk-wGW9U7hdvlM9c8p2jJTsEfkpOhDzR7gfemaYJ2mESYq7S7teyvohz9AIOErCs85scy04R_p6gznu8W1Odm2TgqDnyvfPFFwo46I3ZL52GuXi3tUsJgeumDYLxfbOa5DmlJkwG81WpMqlI_gQRDzAPgy13OdnL5oocq9u_snA0ulji8f0ML40hu9n_xMBVmtdSRmh3SqIVF7O1hid6Hsirm51kA--9NzG2AT2jpIo" alt="Escudo FCG" class="h-full w-auto object-contain"></div>
+<div>
+<h4 class="font-bold text-white text-base">Facultad de Ciencias Médicas "Calixto García"</h4>
+<p class="text-xs text-blue-200">Universidad de Ciencias Médicas de La Habana</p>
+</div>
+</div>
+<p class="text-xs text-slate-300 leading-relaxed max-w-sm pt-2">
+          Entorno virtual docente de apoyo a las actividades académicas, asistenciales e investigativas en el ámbito de las ciencias de la salud.
+        </p>
+</div>
+<!-- Col 2: Síguenos -->
+<div class="space-y-3">
+<h4 class="font-bold text-white text-sm tracking-wide">Síguenos</h4>
+<p class="text-xs text-slate-300">Mantente informado, síguenos a través de nuestras redes sociales</p>
+<div class="flex items-center space-x-2 pt-1">
+<a class="w-8 h-8 rounded-lg bg-[#0284c7] hover:bg-sky-600 flex items-center justify-center text-white transition-colors" href="#" title="Twitter">
+<span class="text-xs font-bold">t</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-[#1877f2] hover:bg-blue-600 flex items-center justify-center text-white transition-colors" href="#" title="Facebook">
+<span class="text-xs font-bold">f</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-[#dc2626] hover:bg-red-600 flex items-center justify-center text-white transition-colors" href="#" title="YouTube">
+<span class="text-xs font-bold">yt</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-[#0077b5] hover:bg-blue-700 flex items-center justify-center text-white transition-colors" href="#" title="LinkedIn">
+<span class="text-xs font-bold">in</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-[#0088cc] hover:bg-sky-500 flex items-center justify-center text-white transition-colors" href="#" title="Telegram">
+<span class="text-xs font-bold">tg</span>
+</a>
+</div>
+</div>
+<!-- Col 3: Sitios de interés -->
+<div class="space-y-2.5">
+<h4 class="font-bold text-white text-sm tracking-wide">Sitios de interés</h4>
+<ul class="text-xs space-y-1.5 text-slate-300">
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Aplicación Móvil</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Infomed Red de Salud</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Biblioteca Virtual</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Portal UCMH</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Intranet Institucional</a></li>
+</ul>
+</div>
+<!-- Col 4: Otros sitios -->
+<div class="space-y-2.5">
+<h4 class="font-bold text-white text-sm tracking-wide">Otros sitios</h4>
+<ul class="text-xs space-y-1.5 text-slate-300">
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Cubadebate</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Granma</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Juventud Rebelde</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Bohemia</a></li>
+<li class=""><a class="hover:text-emerald-400 transition-colors" href="#">Minsap Cuba</a></li>
+</ul>
+</div>
+</div>
+<!-- Subfooter bottom bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3 pt-2">
+<p class="">Desarrollado para: Facultad de Ciencias Médicas Calixto García</p>
+<p class="">© 2026 Facultad de Ciencias Médicas Calixto García. Universidad de Ciencias Médicas de La Habana. Todos los derechos reservados.</p>
+</div>
+</div>
+</footer>
+<!-- END: InstitutionalFooter -->
+<!-- BEGIN: TreeControllerScript -->
+<script data-purpose="toggle-tree-handler">
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('btn-toggle-all');
+      const toggleLabel = document.getElementById('toggle-all-label');
+      const detailsElements = document.querySelectorAll('.academic-year');
+
+      let allExpanded = false;
+
+      toggleBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        detailsElements.forEach(item => {
+          item.open = allExpanded;
+        });
+        toggleLabel.textContent = allExpanded ? 'Colapsar todo' : 'Expandir todo';
+      });
+    });
+  </script>
+<!-- END: TreeControllerScript -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

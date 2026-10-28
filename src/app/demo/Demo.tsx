@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 
 const links = [
   { slug: '/', label: 'Home' },
+  { slug: '/login', label: 'Login' },
   { slug: '/demo', label: 'Demo' }
 ];
 
